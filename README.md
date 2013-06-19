@@ -2,7 +2,7 @@ vbox
 ====
 
 This Puppet module installs the VirtualBox virtualization software.
-For example, include the following in your manifests:
+To use this module, place the following in your manifests:
 
     include vbox
 

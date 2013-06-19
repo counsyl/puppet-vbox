@@ -4,7 +4,7 @@
 #
 class vbox(
   $ensure     = 'installed',
-  $packge     = $vbox::params::package,
+  $package    = $vbox::params::package,
   $provider   = $vbox::params::provider,
   $source     = $vbox::params::source,
   $apt_url    = $vbox::params::apt_url,
@@ -18,6 +18,10 @@ class vbox(
       include apt
       include apt::update
 
+      # Have Oracle's GPG key in place, and construct an apt sources list
+      # specific for VirtualBox.
+      apt::key { $gpg_source: }
+
       $sources = "${apt::sources_d}/oracle_vbox.list"
       $repositories = [
         {'uri'          => $apt_url,
@@ -25,8 +29,6 @@ class vbox(
          'components'   => ['contrib'],
         }
       ]
-
-      apt::key { $gpg_source: }
 
       apt::sources { $sources:
         repositories => $repositories,

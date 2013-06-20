@@ -7,7 +7,7 @@ class vbox::params {
   $version = '4.2.12'
   $major_version = inline_template("<%= @version.split('.')[0..1].join('.') %>")
 
-  # The build number is necessary to to install on Mac.
+  # The build number is necessary to construct proper URLs.
   $build = '84980'
 
   # The source of the GPG key for the VirtualBox apt repository.
@@ -16,17 +16,30 @@ class vbox::params {
   # The URL of the VirtualBox apt repository.
   $apt_url = 'http://download.virtualbox.org/virtualbox/debian/'
 
+  # The base URL to download VirtualBox packages and extension packs.
+  $download_url = "http://download.virtualbox.org/virtualbox/${version}"
+
+  # Parameters for the Extension Pack.
+  $extension_pack = "Oracle_VM_VirtualBox_Extension_Pack-${version}-${build}.vbox-extpack"
+  $extension_pack_url = "${download_url}/${extension_pack}"
+
   case $::osfamily {
     darwin: {
       $package = "VirtualBox-${major_version}"
-      $source  = "http://download.virtualbox.org/virtualbox/${version}/VirtualBox-${version}-${build}-OSX.dmg"
+      $dmg = "VirtualBox-${version}-${build}-OSX.dmg"
+      $source  = "${download_url}/${dmg}"
       $provider = 'pkgdmg'
+      $extension_pack_dir = '/Applications/VirtualBox.app/Contents/MacOS/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack'
     }
     debian: {
       $package = "virtualbox-${major_version}"
+      $extension_pack_dir = '/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack'
     }
     default: {
       fail("Do not know how to install VirtualBox on ${::osfamily}.\n")
     }
   }
+
+  # Path to VBoxManage.
+  $vboxmanage = '/usr/bin/VBoxManage'
 }

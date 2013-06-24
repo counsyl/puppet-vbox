@@ -25,7 +25,7 @@ class vbox::params {
 
   case $::osfamily {
     darwin: {
-      $package = "VirtualBox-${major_version}"
+      $package = "VirtualBox-${version}"
       $dmg = "VirtualBox-${version}-${build}-OSX.dmg"
       $source  = "${download_url}/${dmg}"
       $provider = 'pkgdmg'

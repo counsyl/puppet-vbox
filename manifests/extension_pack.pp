@@ -1,11 +1,15 @@
 # == Class: vbox::extensions
 #
-# Installs the VirtualBox Extension Pack.
+# Installs Oracle's VirtualBox Extension Pack.
 #
 # === Parameters
 #
-# Parameters other than `ensure` are for advanced usage only, and you should not
-# have to customize any of these values.
+# Parameters other than `ensure` are for advanced usage only, you shouldn't
+# have to customize these values.
+#
+# [*ensure*]
+#  Whether or not to install the extension pack, defaults to 'present'
+#  When set to 'absent', ensures removal of the extension pack.
 #
 # [*source*]
 #  The URL of the extension pack.

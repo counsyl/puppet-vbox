@@ -1,5 +1,5 @@
 name    'counsyl-vbox'
-version '0.9.0'
+version '0.9.1'
 source  'git://github.counsyl.com/dev/puppet-vbox.git'
 author  'Counsyl, Inc.'
 license 'Apache License, Version 2.0'

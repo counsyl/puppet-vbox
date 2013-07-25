@@ -8,7 +8,7 @@ class vbox::params {
   $major_version = inline_template("<%= @version.split('.')[0..1].join('.') %>")
 
   # The build number is necessary to construct proper URLs.
-  $build = hiera('vbox::build', '86922')
+  $build = hiera('vbox::build', '86992')
 
   # The source of the GPG key for the VirtualBox apt repository.
   $gpg_source = 'puppet:///modules/vbox/oracle_vbox.gpg'

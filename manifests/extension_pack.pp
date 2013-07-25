@@ -68,7 +68,7 @@ class vbox::extension_pack(
         user    => 'root',
         cwd     => $sys::root_home,
         creates => $directory,
-        require => Class['vbox']
+        require => [Exec['extension_pack-download'], Class['vbox']],
       }
     }
     'absent': {

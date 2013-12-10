@@ -16,7 +16,7 @@
 #
 # [*pack*]
 #  The base name of the VirtualBox extension pack, for example:
-#  "Oracle_VM_VirtualBox_Extension_Pack-4.2.12-84980.vbox-extpack"
+#  "Oracle_VM_VirtualBox_Extension_Pack-4.2.12.vbox-extpack"
 #
 # [*directory*]
 #  The directory created when the VirtualBox extension pack is installed,

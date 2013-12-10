@@ -4,11 +4,11 @@
 #
 class vbox::params {
   # The full version, and the major version (omits the subminor number).
-  $version = hiera('vbox::version', '4.2.18')
+  $version = hiera('vbox::version', '4.2.20')
   $major_version = inline_template("<%= @version.split('.')[0..1].join('.') %>")
 
   # The build number is necessary to construct proper URLs.
-  $build = hiera('vbox::build', '88780')
+  $build = hiera('vbox::build', '90983')
 
   # The source of the GPG key for the VirtualBox apt repository.
   $gpg_source = 'puppet:///modules/vbox/oracle_vbox.gpg'
@@ -20,7 +20,7 @@ class vbox::params {
   $download_url = "http://download.virtualbox.org/virtualbox/${version}"
 
   # Parameters for the Extension Pack.
-  $extension_pack = "Oracle_VM_VirtualBox_Extension_Pack-${version}-${build}.vbox-extpack"
+  $extension_pack = "Oracle_VM_VirtualBox_Extension_Pack-${version}.vbox-extpack"
   $extension_pack_url = "${download_url}/${extension_pack}"
 
   case $::osfamily {

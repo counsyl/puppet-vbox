@@ -34,31 +34,13 @@ class vbox::extension_pack(
 ) inherits vbox::params {
   include sys
 
-  # For downloading the extension pack, use curl on OS X and wget on
-  # all other platforms.
-  case $::osfamily {
-    darwin: {
-      $dl_cmd = 'curl --remote-name --location --silent'
-      $dl_req = undef
-    }
-    default: {
-      include sys::wget
-      $dl_cmd = 'wget --quiet'
-      $dl_req = Class['sys::wget']
-    }
-  }
-
   case $ensure {
     'installed', 'present': {
       # Download the extension pack into root's home directory.
       $pack_path = "${sys::root_home}/${pack}"
-      exec { 'extension_pack-download':
-        command => "${dl_cmd} ${source}",
-        path    => ['/bin', '/usr/bin'],
-        user    => 'root',
-        cwd     => $sys::root_home,
-        creates => $pack_path,
-        require => $dl_req,
+      sys::fetch { 'extension-pack':
+        source      => $source,
+        destination => $pack_path,
       }
 
       # Install the Extension Pack with `VBoxManage`.
@@ -68,7 +50,7 @@ class vbox::extension_pack(
         user    => 'root',
         cwd     => $sys::root_home,
         creates => $directory,
-        require => [Exec['extension_pack-download'], Class['vbox']],
+        require => [Sys::Fetch['extension-pack'], Class['vbox']],
       }
     }
     'absent': {

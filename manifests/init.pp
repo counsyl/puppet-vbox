@@ -39,14 +39,14 @@ class vbox(
     debian: {
       # On debian, we're going to have to setup Oracle's VirtualBox
       # repository first before installing the package.
-      include apt
-      include apt::update
+      include sys::apt
+      include sys::apt::update
 
       # Have Oracle's GPG key in place, and construct an apt sources list
       # specific for VirtualBox.
-      apt::key { $gpg_source: }
+      sys::apt::key { $gpg_source: }
 
-      $sources = "${apt::sources_d}/oracle_vbox.list"
+      $sources = "${sys::apt::sources_d}/oracle_vbox.list"
       $repositories = [
         {'uri'          => $apt_url,
          'distribution' => $::lsbdistcodename,
@@ -54,17 +54,17 @@ class vbox(
         }
       ]
 
-      apt::sources { $sources:
+      sys::apt::sources { $sources:
         repositories => $repositories,
         source       => false,
-        notify       => Class['apt::update'],
-        require      => Apt::Key[$gpg_source],
+        notify       => Class['sys::apt::update'],
+        require      => Sys::Apt::Key[$gpg_source],
       }
 
-      # Anchoring `apt::update` into this class to guarantee the apt-update
-      # occurs prior to installing the package.
+      # Anchoring `sys::apt::update` into this class to guarantee the
+      # apt-update occurs prior to installing the package.
       anchor { 'vbox::apt':
-        require => Class['apt::update'],
+        require => Class['sys::apt::update'],
       }
 
       # Dynamic Kernel Module Support package is needed so that kernel upgrades

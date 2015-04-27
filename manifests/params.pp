@@ -24,14 +24,14 @@ class vbox::params {
   $extension_pack_url = "${download_url}/${extension_pack}"
 
   case $::osfamily {
-    darwin: {
+    'Darwin': {
       $package = "VirtualBox-${version}"
       $dmg = "VirtualBox-${version}-${build}-OSX.dmg"
       $source  = "${download_url}/${dmg}"
       $provider = 'pkgdmg'
       $extension_pack_dir = '/Applications/VirtualBox.app/Contents/MacOS/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack'
     }
-    debian: {
+    'Debian': {
       $package = "virtualbox-${major_version}"
       $extension_pack_dir = '/usr/lib/virtualbox/ExtensionPacks/Oracle_VM_VirtualBox_Extension_Pack'
     }

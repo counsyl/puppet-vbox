@@ -36,7 +36,7 @@ class vbox(
 ) inherits vbox::params {
 
   case $::osfamily {
-    debian: {
+    'Debian': {
       # On debian, we're going to have to setup Oracle's VirtualBox
       # repository first before installing the package.
       include sys::apt

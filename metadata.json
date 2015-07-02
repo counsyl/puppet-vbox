@@ -3,7 +3,7 @@
   "version": "0.9.12",
   "author": "Counsyl, Inc.",
   "summary": "Puppet module for installing and configuring VirtualBox",
-  "license": "Apache License, Version 2.0",
+  "license": "Apache-2.0",
   "source": "git://github.com/counsyl/puppet-vbox.git",
   "project_page": "https://github.com/counsyl/puppet-vbox",
   "issues_url": "https://github.com/counsyl/puppet-vbox/issues",

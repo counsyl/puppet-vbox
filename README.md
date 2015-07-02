@@ -23,6 +23,16 @@ include vbox
 include vbox::extension_pack
 ```
 
+### `vbox::timesync`
+
+Allows managing of host time synchronization on VirtualBox guests (only supports Debian at this time).  The following example disables time sync:
+
+```puppet
+class { 'vbox::timesync':
+  ensure => 'disabled',
+}
+```
+
 License
 -------
 

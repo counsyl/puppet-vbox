@@ -1,10 +1,27 @@
 vbox
 ====
 
-This Puppet module installs the VirtualBox virtualization software.
-To use this module, place the following in your manifests:
+This Puppet module is for installing and configuring [VirtualBox](https://www.virtualbox.org/), the open source virtualization platform.
 
-    include vbox
+Classes
+-------
+
+### `vbox`
+
+This class installs VirtualBox for the platform.  To use, simply include this class:
+
+```puppet
+include vbox
+```
+
+### `vbox::extension_pack`
+
+Installs Oracle's VirtualBox [Etension Pack](https://www.virtualbox.org/manual/ch01.html#intro-installing), the commercial extension that provides advanced features for USB 2.0 and VRDP support.  To use, simply include the class after [`vbox`](#vbox):
+
+```puppet
+include vbox
+include vbox::extension_pack
+```
 
 License
 -------
@@ -19,4 +36,4 @@ Justin Bronn <justin@counsyl.com>
 Support
 -------
 
-Please log tickets and issues at https://github.counsyl.com/dev/puppet-vbox
+Please log tickets and issues at https://github.com/counsyl/puppet-vbox

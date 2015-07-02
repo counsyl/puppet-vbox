@@ -16,7 +16,7 @@
 #
 # [*pack*]
 #  The base name of the VirtualBox extension pack, for example:
-#  "Oracle_VM_VirtualBox_Extension_Pack-4.2.12.vbox-extpack"
+#  "Oracle_VM_VirtualBox_Extension_Pack-4.3.28.vbox-extpack"
 #
 # [*directory*]
 #  The directory created when the VirtualBox extension pack is installed,
@@ -32,11 +32,13 @@ class vbox::extension_pack(
   $directory  = $vbox::params::extension_pack_dir,
   $vboxmanage = $vbox::params::vboxmanage,
 ) inherits vbox::params {
-  include sys
-
   case $ensure {
     'installed', 'present': {
+      include sys
+
       # Download the extension pack into root's home directory.
+      # TODO: This needs to be saved to a platform-dependent cache directory
+      #  and not in root's home.
       $pack_path = "${sys::root_home}/${pack}"
       sys::fetch { 'extension-pack':
         source      => $source,

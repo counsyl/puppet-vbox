@@ -1,6 +1,6 @@
 {
   "name": "counsyl-vbox",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "author": "Counsyl, Inc.",
   "summary": "Puppet module for installing and configuring VirtualBox",
   "license": "Apache-2.0",
@@ -9,6 +9,17 @@
   "issues_url": "https://github.com/counsyl/puppet-vbox/issues",
   "description": "Puppet module for installing and configuring VirtualBox",
   "dependencies": [
-    {"name":"counsyl/sys","version_requirement":">= 0.9.15"}
+    {"name": "counsyl/sys", "version_requirement":">= 0.9.18 <2.0.0"}
+  ],
+  "operatingsystem_support": [
+      {
+          "operatingsystem": "Darwin"
+      },
+      {
+          "operatingsystem": "Debian"
+      },
+      {
+          "operatingsystem": "Ubuntu"
+      }
   ]
 }

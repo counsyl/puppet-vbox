@@ -48,9 +48,10 @@ class vbox(
 
       $sources = "${sys::apt::sources_d}/oracle_vbox.list"
       $repositories = [
-        {'uri'          => $apt_url,
-         'distribution' => $::lsbdistcodename,
-         'components'   => ['contrib'],
+        {
+          'uri'          => $apt_url,
+          'distribution' => $::lsbdistcodename,
+          'components'   => ['contrib'],
         }
       ]
 

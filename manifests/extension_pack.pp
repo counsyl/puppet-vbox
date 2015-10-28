@@ -46,12 +46,15 @@ class vbox::extension_pack(
       }
 
       # Install the Extension Pack with `VBoxManage`.
+      $escaped_version = inline_template(
+        "<%= scope['vbox::params::version'].gsub('.', '\.') %>"
+      )
       exec { 'extension_pack-install':
         command => "${vboxmanage} extpack install --replace ${pack}",
         path    => ['/bin', '/usr/bin'],
         user    => 'root',
         cwd     => $sys::root_home,
-        creates => $directory,
+        unless  => "${vboxmanage} list extpacks | grep -e '^Version:[[:space:]]*${escaped_version}$'",
         require => [Sys::Fetch['extension-pack'], Class['vbox']],
       }
     }

@@ -1,6 +1,6 @@
 {
   "name": "counsyl-vbox",
-  "version": "0.9.14",
+  "version": "0.9.15",
   "author": "Counsyl, Inc.",
   "summary": "Puppet module for installing and configuring VirtualBox",
   "license": "Apache-2.0",

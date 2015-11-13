@@ -1,3 +1,9 @@
+## 0.9.16 (11/13/2015)
+
+IMPROVEMENTS:
+
+* Upgrade to VirtualBox 4.3.34
+
 ## 0.9.15 (10/28/2015)
 
 IMPROVEMENTS:

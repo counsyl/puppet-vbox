@@ -1,3 +1,9 @@
+## 0.9.17 (08/29/2016)
+
+BUG FIXES
+
+* Fix extension pack command escaping.
+
 ## 0.9.16 (11/13/2015)
 
 IMPROVEMENTS:

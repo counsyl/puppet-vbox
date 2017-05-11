@@ -35,6 +35,7 @@ class vbox::extension_pack(
   case $ensure {
     'installed', 'present': {
       include sys
+      include sys::expect
 
       # Download the extension pack into root's home directory.
       # TODO: This needs to be saved to a platform-dependent cache directory
@@ -49,13 +50,21 @@ class vbox::extension_pack(
       $escaped_version = inline_template(
         "<%= scope['vbox::params::version'].gsub('.', '\\.') %>"
       )
+      $extpack_install_cmd = "${vboxmanage} extpack install --replace ${pack}"
+      file { '/tmp/extpack_expect_script':
+        ensure => file,
+        owner => 'root',
+        group => 'root',
+        source => 'puppet:///modules/vbox/extpack_expect_script',
+      }
       exec { 'extension_pack-install':
-        command => "${vboxmanage} extpack install --replace ${pack}",
+        # Say yes to the license agreement using expect
+        command => "/usr/bin/expect /tmp/extpack_expect_script $extpack_install_cmd",
         path    => ['/bin', '/usr/bin'],
         user    => 'root',
         cwd     => $sys::root_home,
         unless  => "${vboxmanage} list extpacks | grep -e '^Version:[[:space:]]*${escaped_version}$'",
-        require => [Sys::Fetch['extension-pack'], Class['vbox']],
+        require => [Sys::Fetch['extension-pack'], Class['vbox', 'sys::expect']],
       }
     }
     'absent': {

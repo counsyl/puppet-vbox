@@ -1,0 +1,18 @@
+#!/usr/bin/expect -f
+
+# Says "y" to the license agreement that pops up when installing the extension
+# pack. Or if there is no license agreement, don't do anything.
+
+# All args are assumed to be part of the command to be spawned
+set cmd [lrange $argv 0 end]
+
+spawn {*}$cmd
+expect {
+    "Do you agree to these license terms and conditions (y/n)?" {
+        send "y\r"
+        expect eof
+    }
+    eof {}
+}
+catch wait codes
+exit [lindex $codes 3]  # 4th item is the return code of the spawned process

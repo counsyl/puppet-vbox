@@ -26,11 +26,12 @@
 #  The path to the VBoxManage command, defaults to '/usr/bin/VBoxManage'.
 #
 class vbox::extension_pack(
-  $ensure     = 'present',
-  $source     = $vbox::params::extension_pack_url,
-  $pack       = $vbox::params::extension_pack,
-  $directory  = $vbox::params::extension_pack_dir,
-  $vboxmanage = $vbox::params::vboxmanage,
+  $ensure               = 'present',
+  $source               = $vbox::params::extension_pack_url,
+  $pack                 = $vbox::params::extension_pack,
+  $directory            = $vbox::params::extension_pack_dir,
+  $vboxmanage           = $vbox::params::vboxmanage,
+  $extpack_license_hash,
 ) inherits vbox::params {
   case $ensure {
     'installed', 'present': {
@@ -50,7 +51,7 @@ class vbox::extension_pack(
         "<%= scope['vbox::params::version'].gsub('.', '\\.') %>"
       )
       exec { 'extension_pack-install':
-        command => "${vboxmanage} extpack install --replace ${pack}",
+        command => "${vboxmanage} extpack install --replace ${pack} --accept-license=${extpack_license_hash}",
         path    => ['/bin', '/usr/bin'],
         user    => 'root',
         cwd     => $sys::root_home,

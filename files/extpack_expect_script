@@ -12,7 +12,7 @@ expect {
         send "y\r"
         expect eof
     }
-    eof {}
+    eof {}  # Handles the case where no license agreement prompt was given
 }
 catch wait codes
 exit [lindex $codes 3]  # 4th item is the return code of the spawned process

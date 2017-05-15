@@ -1,3 +1,9 @@
+## 0.9.18 (05/15/2017)
+
+IMPROVEMENTS:
+
+* Support specifying license agreement hash during installation of VirtualBox extensions.
+
 ## 0.9.17 (08/29/2016)
 
 BUG FIXES

@@ -63,7 +63,7 @@ class vbox::extension_pack(
         $license_args = ""
       }
       exec { 'extension_pack-install':
-        command => "${vboxmanage} extpack install --replace ${pack} ${license_args}",
+        command => "${vboxmanage} extpack install ${license_args} --replace ${pack}",
         path    => ['/bin', '/usr/bin'],
         user    => 'root',
         cwd     => $sys::root_home,
